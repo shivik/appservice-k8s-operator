@@ -1,0 +1,32 @@
+apiVersion: example.com/v1alpha1
+kind: AppService
+metadata:
+  name: nginx-app
+  namespace: default
+spec:
+  replicas: 3
+  image: nginx:1.21
+  port: 80
+  environment:
+    ENV: production
+    LOG_LEVEL: info
+  resources:
+    cpu: "100m"
+    memory: "128Mi"
+---
+apiVersion: example.com/v1alpha1
+kind: AppService
+metadata:
+  name: redis-app
+  namespace: default
+spec:
+  replicas: 1
+  image: redis:7-alpine
+  port: 6379
+  environment:
+    REDIS_PASSWORD: secret
+  resources:
+    cpu: "200m"
+    memory: "256Mi"
+
+# Made with Bob
