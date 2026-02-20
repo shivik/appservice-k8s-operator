@@ -96,14 +96,30 @@ Updates AppService Status
 
 ## Installation
 
-### Step 1: Clone and Setup
+### Quick Start (Hot Run)
+
+For a single command to install and run everything:
+
+```bash
+make hot-run
+```
+
+This command will:
+1. Install the CRD
+2. Setup RBAC permissions
+3. Tidy Go dependencies
+4. Start the operator locally
+
+### Manual Installation
+
+#### Step 1: Clone and Setup
 
 ```bash
 cd <your-path-where-you-cloned-this-code>
 go mod tidy
 ```
 
-### Step 2: Install CRD
+#### Step 2: Install CRD
 
 ```bash
 make install
@@ -114,13 +130,13 @@ Verify CRD installation:
 kubectl get crd appservices.example.com
 ```
 
-### Step 3: Setup RBAC
+#### Step 3: Setup RBAC
 
 ```bash
 kubectl apply -f config/rbac/role.yaml
 ```
 
-### Step 4: Run Operator Locally
+#### Step 4: Run Operator Locally
 
 ```bash
 make run
@@ -132,7 +148,7 @@ make build
 ./bin/manager
 ```
 
-### Step 5: Deploy to Cluster
+#### Step 5: Deploy to Cluster
 
 Build and push image:
 ```bash

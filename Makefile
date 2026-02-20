@@ -4,6 +4,17 @@ KUBECONFIG ?= ~/.kube/config
 .PHONY: all
 all: build
 
+.PHONY: hot-run
+hot-run:
+	@echo "Installing CRD..."
+	@kubectl apply -f config/crd/appservice-crd.yaml
+	@echo "Setting up RBAC..."
+	@kubectl apply -f config/rbac/role.yaml
+	@echo "Tidying dependencies..."
+	@go mod tidy
+	@echo "Starting operator..."
+	@go run main.go
+
 .PHONY: build
 build:
 	go build -o bin/manager main.go
